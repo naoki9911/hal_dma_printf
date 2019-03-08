@@ -69,7 +69,7 @@ int __io_putchar(int ch)
 
 int __io_getchar(void)
 {
-
+  return dma_scanf_getc_blocking();
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
@@ -112,7 +112,11 @@ int main(void)
   MX_DMA_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+  setbuf(stdin, NULL);
+  setbuf(stdout, NULL);
+  setbuf(stderr, NULL);
   dma_printf_init(&huart2);
+  dma_scanf_init(&huart2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -120,9 +124,13 @@ int main(void)
   int cnt = 0;
   while (1)
   {
+    char tmp[100];
+    scanf("%s",tmp);
+    printf("RESULT:");
+    printf("%s\n", tmp);
     /* USER CODE END WHILE */
-    HAL_Delay(100);
-    printf("Hello World!:%d\n", cnt++);
+    //HAL_Delay(100);
+    //printf("Hello World!:%d\n", cnt++);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

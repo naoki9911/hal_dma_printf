@@ -24,6 +24,8 @@ uint16_t ring_get_r_ptr(struct ring_buf *ring);
 
 void ring_forward_r_ptr(struct ring_buf *ring, int len);
 
+void ring_set_w_ptr(struct ring_buf *ring, uint16_t w_ptr);
+
 void ring_debug(struct ring_buf *ring);
 
 #endif

@@ -64,6 +64,9 @@ void ring_forward_r_ptr(struct ring_buf *ring, int len){
   }
 }
 
+void ring_set_w_ptr(struct ring_buf *ring, uint16_t w_ptr){
+    ring->w_ptr = w_ptr;
+}
 void ring_debug(struct ring_buf *ring){
   printf("\n====Ring Debug information====\n");
     printf("Buffer Size: %d\n", ring->buf_size);
