@@ -126,8 +126,7 @@ int main(void)
   {
     char tmp[100];
     scanf("%s",tmp);
-    printf("RESULT:");
-    printf("%s\n", tmp);
+    log_info("RESULT:%s\n", tmp);
     /* USER CODE END WHILE */
     //HAL_Delay(100);
     //printf("Hello World!:%d\n", cnt++);
