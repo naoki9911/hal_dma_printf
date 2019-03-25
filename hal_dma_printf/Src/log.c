@@ -2,6 +2,8 @@
 // Created by naoki on 19/03/09.
 //
 #include "main.h"
+#include "log.h"
+#include <stdarg.h>
 void log_info(const char *msg, ...){
     fprintf(stdout, "[INFO]:");
     va_list ap;

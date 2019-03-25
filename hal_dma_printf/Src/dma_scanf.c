@@ -3,10 +3,11 @@
 //
 
 #include "main.h"
+#include "dma_scanf.h"
 
 struct dma_scanf_info dsi;
 
-int dma_scanf_init(UART_HandleTypeDef *scanf_huart){
+void dma_scanf_init(UART_HandleTypeDef *scanf_huart){
     dsi.huart = scanf_huart;
     ring_init(&dsi.rx_ring);
     HAL_UART_Receive_DMA(dsi.huart, dsi.rx_ring.buf, dsi.rx_ring.buf_size);

@@ -3,17 +3,19 @@
 //
 
 #include "main.h"
+#include "dma_printf.h"
+#include <stdbool.h>
 
 struct dma_printf_info dmi;
 
-int dma_printf_init(UART_HandleTypeDef *printf_huart){
+void dma_printf_init(UART_HandleTypeDef *printf_huart){
     dmi.huart = printf_huart;
     ring_init(&dmi.tx_ring);
     dmi.sending = false;
     dmi.previous_send_len = 0;
 }
 
-int dma_printf_putc(uint8_t c){
+void dma_printf_putc(uint8_t c){
     ring_putc(&dmi.tx_ring, c);
     if(!dmi.sending){
         uint16_t len = (uint16_t)ring_available_linear(&dmi.tx_ring);

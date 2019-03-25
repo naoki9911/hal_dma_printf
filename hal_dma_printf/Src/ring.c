@@ -1,4 +1,5 @@
 #include "main.h"
+#include "ring.h"
 
 void ring_init(struct ring_buf *ring){
   ring->buf_size = RING_BUF_SIZE;
