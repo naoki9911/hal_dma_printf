@@ -23,7 +23,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "dma_printf.h"
+#include "dma_scanf.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -128,8 +129,7 @@ int main(void)
     scanf("%s",tmp);
     log_info("RESULT:%s\n", tmp);
     /* USER CODE END WHILE */
-    //HAL_Delay(100);
-    //printf("Hello World!:%d\n", cnt++);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

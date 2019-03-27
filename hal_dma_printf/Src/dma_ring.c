@@ -1,14 +1,14 @@
+#include "dma_ring.h"
 #include "main.h"
-#include "ring.h"
 
-void ring_init(struct ring_buf *ring){
+void dma_ring_init(struct dma_ring_buf *ring){
   ring->buf_size = RING_BUF_SIZE;
   ring->w_ptr = 0;
   ring->r_ptr = 0;
   ring->overwrite_cnt = 0;
 }
 
-int ring_getc(struct ring_buf *ring, uint8_t *c){
+int dma_ring_getc(struct dma_ring_buf *ring, uint8_t *c){
   if(ring->r_ptr == ring->w_ptr) return RING_FAIL;
   uint16_t next_ptr = ring->r_ptr+1;
   if(next_ptr >= ring->buf_size) next_ptr = 0;
@@ -18,7 +18,7 @@ int ring_getc(struct ring_buf *ring, uint8_t *c){
   return RING_SUCCESS;
 }
 
-int ring_putc(struct ring_buf *ring, uint8_t c){
+int dma_ring_putc(struct dma_ring_buf *ring, uint8_t c){
   uint16_t next_ptr = ring->w_ptr+1;
   if(next_ptr >= ring->buf_size) next_ptr = 0;
 
@@ -31,14 +31,14 @@ int ring_putc(struct ring_buf *ring, uint8_t c){
   return RING_SUCCESS;
 }
 
-int ring_available(struct ring_buf *ring){
+int dma_ring_available(struct dma_ring_buf *ring){
   if(ring->w_ptr >= ring->r_ptr){
     return ring->w_ptr - ring->r_ptr;
   }else{
     return ring->buf_size + ring->w_ptr - ring->r_ptr;
   }
 }
-int ring_available_linear(struct ring_buf *ring){
+int dma_ring_available_linear(struct dma_ring_buf *ring){
   if(ring->w_ptr >= ring->r_ptr){
     return ring->w_ptr - ring->r_ptr;
   }else{
@@ -46,15 +46,15 @@ int ring_available_linear(struct ring_buf *ring){
   }
 }
 
-uint16_t ring_get_w_ptr(struct ring_buf *ring){
+uint16_t dma_ring_get_w_ptr(struct dma_ring_buf *ring){
   return ring->w_ptr;
 }
 
-uint16_t ring_get_r_ptr(struct ring_buf *ring){
+uint16_t dma_ring_get_r_ptr(struct dma_ring_buf *ring){
   return ring->r_ptr;
 }
 
-void ring_forward_r_ptr(struct ring_buf *ring, int len){
+void dma_ring_forward_r_ptr(struct dma_ring_buf *ring, int len){
   while(len > 0){
     if(ring->r_ptr+1 >= ring->buf_size){
       ring->r_ptr = 0;
@@ -65,10 +65,10 @@ void ring_forward_r_ptr(struct ring_buf *ring, int len){
   }
 }
 
-void ring_set_w_ptr(struct ring_buf *ring, uint16_t w_ptr){
+void dma_ring_set_w_ptr(struct dma_ring_buf *ring, uint16_t w_ptr){
     ring->w_ptr = w_ptr;
 }
-void ring_debug(struct ring_buf *ring){
+void dma_ring_debug(struct dma_ring_buf *ring){
   printf("\n====Ring Debug information====\n");
     printf("Buffer Size: %d\n", ring->buf_size);
     printf("Write Pointer: %d\n", ring->w_ptr);

@@ -4,11 +4,11 @@
 
 #ifndef HAL_DMA_PRINTF_DMA_SCANF_H
 #define HAL_DMA_PRINTF_DMA_SCANF_H
+#include "dma_ring.h"
 #include "main.h"
-#include "ring.h"
 
 struct dma_scanf_info {
-    struct ring_buf rx_ring;
+    struct dma_ring_buf rx_ring;
     UART_HandleTypeDef *huart;
 };
 

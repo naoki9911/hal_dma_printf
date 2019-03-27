@@ -4,11 +4,11 @@
 
 #ifndef HAL_DMA_PRINTF_DMA_PRINTF_H
 #define HAL_DMA_PRINTF_DMA_PRINTF_H
+#include "dma_ring.h"
 #include "main.h"
-#include "ring.h"
 
 struct dma_printf_info {
-    struct ring_buf tx_ring;
+    struct dma_ring_buf tx_ring;
     int sending;
     UART_HandleTypeDef *huart;
     int previous_send_len;
